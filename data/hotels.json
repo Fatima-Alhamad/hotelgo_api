@@ -1,0 +1,106 @@
+[
+  {
+    "name": "The Grand Vista Hotel",
+    "address": "123 Sunset Boulevard, Los Angeles, CA 90028",
+    "description": "A luxurious hotel offering stunning views of the city and top-notch amenities for a memorable stay.",
+    "rating": 4.7,
+    "amenities": ["Free WiFi", "Pool", "Spa", "Fitness Center", "Restaurant"],
+    "images": [
+      "https://example.com/images/grand-vista-1.jpg",
+      "https://example.com/images/grand-vista-2.jpg"
+    ],
+    "contactInformation": {
+      "phone": "+1-310-555-1234",
+      "email": "info@grandvistahotel.com"
+    },
+    "owner": "John Doe"
+  },
+  {
+    "name": "Seaside Retreat Inn",
+    "address": "456 Ocean Drive, Miami Beach, FL 33139",
+    "description": "A charming inn right on the beach, perfect for a relaxing getaway with personalized service.",
+    "rating": 4.2,
+    "amenities": [
+      "Beachfront",
+      "Complimentary Breakfast",
+      "WiFi",
+      "Pet-Friendly",
+      "Bar"
+    ],
+    "images": [
+      "https://example.com/images/seaside-retreat-1.jpg",
+      "https://example.com/images/seaside-retreat-2.jpg"
+    ],
+    "contactInformation": {
+      "phone": "+1-305-555-5678",
+      "email": "contact@seasideretreatinn.com"
+    },
+    "owner": "Emily Green"
+  },
+  {
+    "name": "Urban Luxe Suites",
+    "address": "789 City Center, New York, NY 10001",
+    "description": "Modern suites in the heart of the city with easy access to major attractions and business centers.",
+    "rating": 4.5,
+    "amenities": [
+      "Free WiFi",
+      "Business Center",
+      "24-Hour Concierge",
+      "Gym",
+      "Rooftop Lounge"
+    ],
+    "images": [
+      "https://example.com/images/urban-luxe-1.jpg",
+      "https://example.com/images/urban-luxe-2.jpg"
+    ],
+    "contactInformation": {
+      "phone": "+1-212-555-9876",
+      "email": "reservations@urbanluxesuites.com"
+    },
+    "owner": "Michael Smith"
+  },
+  {
+    "name": "Mountain Haven Lodge",
+    "address": "321 Alpine Road, Aspen, CO 81611",
+    "description": "A cozy lodge nestled in the mountains, offering a rustic experience with modern comforts.",
+    "rating": 4.8,
+    "amenities": [
+      "Ski-in/Ski-out",
+      "Hot Tub",
+      "Fireplace",
+      "Free Breakfast",
+      "Hiking Trails"
+    ],
+    "images": [
+      "https://example.com/images/mountain-haven-1.jpg",
+      "https://example.com/images/mountain-haven-2.jpg"
+    ],
+    "contactInformation": {
+      "phone": "+1-970-555-6543",
+      "email": "info@mountainhavenlodge.com"
+    },
+    "owner": "Sarah Johnson"
+  },
+  {
+    "name": "Historic Downtown Hotel",
+    "address": "234 Heritage Street, Charleston, SC 29401",
+    "description": "A beautifully restored historic hotel that combines charm and elegance with modern amenities.",
+    "rating": 4.6,
+    "amenities": [
+      "Free WiFi",
+      "Historic Tours",
+      "On-Site Dining",
+      "Event Spaces",
+      "Fitness Room"
+    ],
+    "images": [
+      "https://example.com/images/historic-downtown-1.jpg",
+      "https://example.com/images/historic-downtown-2.jpg"
+    ],
+    "contactInformation": {
+      "phone": "+1-843-555-4321",
+      "email": "info@historicdowntownhotel.com"
+    },
+    "owner": "William Carter"
+  }
+]
