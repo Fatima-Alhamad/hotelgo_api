@@ -1,6 +1,7 @@
 const Hotel = require('../models/hotelModel');
 const Review = require('../models/reviewModel');
 const User = require('../models/userModel');
+const Booking = require('../models/bookingModel');
 const catchAsync = require('../utiles/catchAsync');
 const AppError = require('../utiles/errorApp');
 
@@ -10,6 +11,7 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
+    result: reviews.length,
     data: {
       reviews,
     },
@@ -21,6 +23,22 @@ exports.createReview = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   req.body.user = userId;
   req.body.hotel = hotelId;
+  const hotel = await Hotel.findById(hotelId);
+  if (!hotel) {
+    return next(new AppError(`hotel not found`, 404));
+  }
+  const booking = await Booking.findOne({ hotel: hotelId, user: userId });
+  // if (!booking || booking.status !== 'confirmed') {
+  //   return next(
+  //     new AppError(
+  //       'you cannot make reviews if you did not make booking for this hotel',
+  //       403
+  //     )
+  //   );
+  // }
+
+  hotel.reviewsCount += 1;
+  hotel.save();
   const newReview = await Review.create(req.body);
   res.status(201).json({
     status: 'success',
@@ -34,12 +52,12 @@ exports.deleteReview = catchAsync(async (req, res, next) => {
   const { reviewId } = req.params;
   const review = await Review.findById(reviewId);
   if (!review) {
-    return next(new AppError('review does not exists ', 404));
+    return next(new AppError('review does not exist ', 404));
   }
   if (review.user.toString() !== req.user._id.toString()) {
     const user = await User.findById(req.user._id);
     if (user.role !== 'admin') {
-      return next(new AppError('you are not unauthorized', 401));
+      return next(new AppError('you are not authorized', 403));
     }
   }
   const hotel = await Hotel.findById(review.hotel);

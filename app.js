@@ -4,6 +4,7 @@ app.use(express.json({ limit: '10kb' }));
 const usersRouter = require('./routes/usersRouter');
 const hotelRouter = require('./routes/hotelRouter');
 const reviewRouter = require('./routes/reviewRouter');
+const bookingRouter = require('./routes/bookingRouter');
 
 const AppError = require('./utiles/errorApp');
 const errorController = require('./controllers/errorController');
@@ -38,8 +39,10 @@ app.use('/api/v1/users', usersRouter);
 //hotels:
 app.use('/api/v1/hotels', hotelRouter);
 // reviews:
-app.use('/api/v1/reviews', reviewRouter);
+// app.use('/api/v1/reviews', reviewRouter);
 
+// bookings:
+app.use('/api/v1/bookings', bookingRouter);
 app.all('*', (req, res, next) => {
   // res.status(404).json({
   //     status:'fail',

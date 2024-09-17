@@ -9,7 +9,7 @@ const AppError = require('../utiles/errorApp');
 const ApiFeatures = require('../utiles/APIFeatures');
 
 exports.getAllHotels = catchAsync(async (req, res, next) => {
-  const features = new ApiFeatures(Hotel.find(), req.query)
+  const features = await new ApiFeatures(Hotel.find(), req.query)
     .filter()
     .sort()
     .limitingFields()
@@ -26,7 +26,7 @@ exports.getAllHotels = catchAsync(async (req, res, next) => {
 });
 exports.getHotel = catchAsync(async (req, res, next) => {
   const { hotelId } = req.params;
-  const hotel = await Hotel.findById(hotelId)
+  const hotel = await Hotel.findById(hotelId);
   if (!hotel) {
     return next(new AppError(`No found hotel with this ID`, 404));
   }
@@ -39,6 +39,8 @@ exports.getHotel = catchAsync(async (req, res, next) => {
 });
 
 exports.addHotel = catchAsync(async (req, res, next) => {
+  userId = req.user._id;
+  req.body.owner = userId;
   const newHotel = await Hotel.create(req.body);
   res.status(201).json({
     status: 'success',
@@ -51,9 +53,14 @@ exports.addHotel = catchAsync(async (req, res, next) => {
 exports.deleteHotel = catchAsync(async (req, res, next) => {
   const { hotelId } = req.params;
   const hotel = await Hotel.findById(hotelId);
-  if (req.user._id.toString() !== hotel.owner.toString()) {
+  if (!hotel) {
+    return next(new AppError('no hotel with this id', 404));
+  }
+  if (req.user._id.toString() !== hotel.owner._id.toString()) {
     if (req.user.role !== 'admin') {
-      next(new AppError('your are not authorized to make this action', 403));
+      return next(
+        new AppError('your are not authorized to make this action', 403)
+      );
     }
   }
   const rooms = await Room.find({ hotel: hotel._id });
@@ -73,5 +80,26 @@ exports.deleteHotel = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: 'success',
     data: null,
+  });
+});
+
+exports.UpdateHotel = catchAsync(async (req, res, next) => {
+  const { hotelId } = req.params;
+  const hotel = await Hotel.findById(hotelId);
+  if (req.user._id.toString() !== hotel.owner._id.toString()) {
+    return next(
+      new AppError('your are not authorized to make this action', 403)
+    );
+  }
+  req.body.owner = req.user._id;
+  const updatedHotel = await Hotel.findByIdAndUpdate(hotelId, req.body, {
+    new: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      hotel: updatedHotel,
+    },
   });
 });
